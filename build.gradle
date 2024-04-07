@@ -1,0 +1,32 @@
+plugins {
+    // id 'org.jetbrains.kotlin.jvm' version '1.9.23'
+    // OR alias(libs.plugins.xX) -- See gradle/libs.versions.toml
+    alias(libs.plugins.kotlinJVM)
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+    testImplementation libs.junit.jupiter.engine
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    //implementation libs.guava
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    mainClass = 'net.x320.heac01.cli.AppKt'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
